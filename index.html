@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🎂 Happy Birthday Sir!</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+      color: white;
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    /* Background animation using CSS */
+    .bg-animated {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      z-index: -2;
+      background: linear-gradient(-45deg, #ff0080, #7928ca, #2afadf, #00f2fe);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      filter: blur(10px) brightness(0.7);
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      text-align: center;
+      text-shadow: 2px 2px 6px #000;
+    }
+    .form-box {
+      background: rgba(0, 0, 0, 0.6);
+      padding: 30px;
+      border-radius: 15px;
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+      animation: fadeIn 1s ease-in-out;
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 10px;
+      font-size: 1em;
+    }
+    button {
+      padding: 12px 25px;
+      font-size: 1em;
+      background: linear-gradient(145deg, #f94cbe, #5f5edc);
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    button:hover {
+      transform: scale(1.05);
+    }
+    #greeting {
+      display: none;
+      text-align: center;
+      margin-top: 30px;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+    #confetti-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 999;
+    }
+    .wish-list {
+      margin-top: 30px;
+      text-align: left;
+      max-width: 600px;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 12px;
+    }
+    .wish-list h3 {
+      color: #ffdeee;
+      margin-bottom: 10px;
+    }
+    .wish-item {
+      margin-bottom: 10px;
+      padding: 10px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 8px;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .firework {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: #fff;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: explode 1s ease-out forwards;
+}
+
+@keyframes explode {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--x), var(--y)) scale(0.5);
+  }
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- CSS Background instead of video -->
+  <div class="bg-animated"></div>
+
+  <canvas id="confetti-canvas"></canvas>
+  <div id="fireworks-container"></div>
+
+  <h1>🎉 Welcome to the Birthday Portal</h1>
+
+  <div class="form-box" id="step1">
+    <h2>👤 Enter Your Name</h2>
+    <input type="text" id="userName" placeholder="Your Name">
+    <button onclick="goToDOB()">Next</button>
+  </div>
+
+  <div class="form-box" id="step2" style="display:none;">
+    <h2>👥 Enter Your Date of Birth</h2>
+    <input type="date" id="userDOB">
+    <button onclick="showGreeting()">Submit</button>
+  </div>
+
+  <div id="greeting">
+    <h2>🎂 Happy Birthday Sir!</h2>
+    <p>📚 Dear <span id="displayName"></span>, thank you for being an amazing guide. Your wisdom and kindness light our path every day.</p>
+    <p>🎈 Wishing you a day filled with smiles, joy, and heartfelt appreciation from your students!</p>
+    <audio id="birthdayMusic" loop preload="auto"> 
+      <source src="HP.mp3.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+
+    <div class="wish-list">
+      <h3>💌 Best Wishes from Boys:</h3>
+      <div class="wish-item">🎊 "Wishing you endless happiness and success, sir!" </div>
+      <div class="wish-item">🎉 "Thank you for being a wonderful teacher. Happy Birthday!"</div>
+      <div class="wish-item">🎁 "May your birthday be as inspiring as your lessons!" </div>
+      <div class="wish-item">🎈 "Your patience and passion make you the best mentor. Enjoy your special day!" </div>
+      <div class="wish-item">📘 "You’re not just a teacher, you're a guide, philosopher, and friend. HBD Sir!</div>
+      <div class="wish-item">💡 "Every lesson from you is a treasure. Keep shining, sir!" </div>
+      <div class="wish-item">⚙️ "From circuits to coding, you made everything fun. Have an awesome birthday!" </div>
+      <div class="wish-item">✨ "You're the reason we aim higher every day. Happy Birthday!" </div>
+      <div class="wish-item"> 📝 Behind every successful student is a great teacher like you! 🎁 May your special day be filled with joy and peace. 🍰🎊</div>
+      <div class="wish-item">🎂 May your birthday be as amazing as your classes — full of energy, learning, and lots of smiles! 😄📘🌟</div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script>
+    function goToDOB() {
+      const name = document.getElementById('userName').value.trim();
+      if (name.toLowerCase() === 'vamshi') {
+        localStorage.setItem('username', name);
+        document.getElementById('step1').style.display = 'none';
+        document.getElementById('step2').style.display = 'block';
+      } else if (name) {
+        alert("Sorry sir! Please enter your correct name.");
+      } else {
+        alert("Please enter your name");
+      }
+    }
+
+    function showGreeting() {
+  const name = localStorage.getItem('username') || 'Friend';
+  const dob = document.getElementById('userDOB').value;
+  if (dob === '2025-06-28') {
+    document.getElementById('displayName').innerText = name;
+    document.getElementById('step2').style.display = 'none';
+    document.getElementById('greeting').style.display = 'block';
+
+    const music = document.getElementById('birthdayMusic');
+    if (music) {
+      music.play().catch(error => {
+        console.log("Autoplay failed:", error);
+      });
+    }
+
+    triggerConfetti();
+
+    // 🎆 Wait 1 second, then play fireworks
+    setTimeout(() => {
+      triggerFireworks();
+    }, 1000);
+
+  } else {
+    alert("Sorry sir! Please enter your correct date of birth.");
+  }
+}
+setTimeout(() => {
+  triggerFireworks();
+  setTimeout(triggerFireworks, 1500);
+  setTimeout(triggerFireworks, 3000);
+}, 1000);
+
+
+    function triggerConfetti() {
+      const duration = 5 * 1000;
+      const end = Date.now() + duration;
+      (function frame() {
+        confetti({
+          particleCount: 5,
+          angle: 60,
+          spread: 55,
+          origin: { x: 0 }
+        });
+        confetti({
+          particleCount: 5,
+          angle: 120,
+          spread: 55,
+          origin: { x: 1 }
+        });
+        if (Date.now() < end) {
+          requestAnimationFrame(frame);
+        }
+      })();
+    }
+  </script>
+
+</body>
+</html>
